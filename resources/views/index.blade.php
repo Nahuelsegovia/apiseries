@@ -12,17 +12,8 @@
 <body>
     <div class="container contenido">
 
-        <div class="serie">
-        <div class="portada-serie">
-            <img src="imagen.jpg" alt="" srcset="">
-        </div>
-        <h1>Titulo de la serie 1 </h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, modi numquam. Error magnam nisi quisquam. Alias unde, accusamus distinctio suscipit, iste voluptatibus nostrum non consequatur provident hic obcaecati omnis maxime!
-        </p>
-        <div class="iconitos">
-        <i class="far fa-times-circle iconos uno"></i>
-        <i class="fas fa-angle-double-right iconos dos"></i>
-        </div>
+        <div class="serie" id="serie">
+        
         </div>
 
     </div>
@@ -35,24 +26,38 @@
         </div>
 </body>
 <script>
+    let estadoDiv = 0;
     obtenerDatos.addEventListener('click', (event) =>{
+    estadoDiv++;
     event.preventDefault();
     const peticion = new XMLHttpRequest();
+    const pintar = document.getElementById('serie');
     
     peticion.open('GET', '/api/ver', true)
     peticion.addEventListener('load', (data) =>{
-        let datos = JSON.parse(data.target.response)
+        let datos = JSON.parse(data.target.response);
         for(let recorrer of datos){
-            console.log(recorrer.id, recorrer.titulo_serie, 
-            recorrer.donde_ver_serie, recorrer.imagen_serie, 
-            recorrer.cancion_serie);
+            console.log(recorrer);
+            pintar.innerHTML += `<div class="portada-serie">
+                                    <img src="imagen.jpg" alt="" srcset="">
+                                </div>
+                                <h1>${recorrer.titulo_serie}</h1>
+                                <p>${recorrer.descripcion_serie}</p>
+                                <div class="iconitos">
+                                <i class="far fa-times-circle iconos uno"></i>
+                                <i class="fas fa-angle-double-right iconos dos"></i>
+                            </div>`;
         }
     });
 
     peticion.send()
+    if(estadoDiv = 2){
+        pintar.innerHTML = '';
+        peticion.send();
+        estadoDiv = 0;
+    }
 });
-
-    
+  
     </script>
 <!-- JS, Popper.js, and jQuery -->
 <script src="https://kit.fontawesome.com/f5a6b916a8.js" crossorigin="anonymous"></script>

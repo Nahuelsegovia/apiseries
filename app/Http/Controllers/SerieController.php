@@ -40,7 +40,7 @@ class SerieController extends Controller
     }
 
     public function verSeries(){
-        $serie = App\Serie::all();
+        $serie = App\Serie::limit(1)->inRandomOrder()->get();
         return $serie;
     }
 
