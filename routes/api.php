@@ -25,7 +25,9 @@ Route::delete('/eliminar/{id}', 'SerieController@eliminarSerie')->name('eliminar
 
 Route::put('/editar/{id}', 'SerieController@editarSerie')->name('editar.serie');
 
-Route::get('/ver', 'SerieController@verSeries')->name('ver.series');
+Route::get('/ver', 'SerieController@verSeries')
+->name('ver.series')
+->middleware('throttle:100,1'); // 100 Request por minuto, configurado con el Middleware
 
 Route::get('/ver/{id}', 'SerieController@verSerie')->name('ver.serie');
 

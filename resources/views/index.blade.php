@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,10 +14,9 @@
         <div class="serie" id="serie">
         
         </div>
-
     </div>
 
-    <div class="flex-center position-ref full-height">
+    <div class="botonTraerDatos">
         <form action="/api/ver" method="get">
         @csrf
         <input type="submit" id="obtenerDatos">
@@ -27,29 +25,33 @@
 </body>
 <script>
     let estadoDiv = 0;
+    const pintar = document.getElementById('serie');
+    pintar.style.visibility = 'hidden';
+
     obtenerDatos.addEventListener('click', (event) =>{
     estadoDiv++;
     event.preventDefault();
+    pintar.style.visibility = 'visible';
+
     const peticion = new XMLHttpRequest();
-    const pintar = document.getElementById('serie');
-    
+
     peticion.open('GET', '/api/ver', true)
     peticion.addEventListener('load', (data) =>{
         let datos = JSON.parse(data.target.response);
         for(let recorrer of datos){
             console.log(recorrer);
             pintar.innerHTML += `<div class="portada-serie">
-                                    <img src="imagen.jpg" alt="" srcset="">
+                                    <img src="${recorrer.imagen_serie}" alt="" srcset="">
                                 </div>
                                 <h1>${recorrer.titulo_serie}</h1>
                                 <p>${recorrer.descripcion_serie}</p>
-                                <div class="iconitos">
-                                <i class="far fa-times-circle iconos uno"></i>
-                                <i class="fas fa-angle-double-right iconos dos"></i>
-                            </div>`;
+                                <p>Podes ver la serie en: ${recorrer.donde_ver_serie}<p/>
+                                
+                                
+                                `;
+            iframe.src = `${recorrer.cancion_serie}`
         }
     });
-
     peticion.send()
     if(estadoDiv = 2){
         pintar.innerHTML = '';

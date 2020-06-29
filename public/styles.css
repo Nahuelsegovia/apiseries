@@ -1,8 +1,16 @@
 body{
-    background: #7f7f7f;
+    /*background: #7f7f7f;*/
+    background: #ffb7b2;
     color: white;
 }
 
+
+.botonTraerDatos{
+    position: absolute;
+    top: 2%;
+    left: 42.5%;
+    border: none;
+}
 
 .contenido{
     margin-top: 5%;
@@ -58,3 +66,4 @@ body{
 .serie .dos{
     margin-left: 40px;
 }
+
