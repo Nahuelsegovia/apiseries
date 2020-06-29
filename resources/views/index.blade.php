@@ -19,7 +19,7 @@
     <div class="botonTraerDatos">
         <form action="/api/ver" method="get">
         @csrf
-        <input type="submit" id="obtenerDatos">
+        <input type="submit" id="obtenerDatos" value="Ver serie">
         </form>
         </div>
 </body>
